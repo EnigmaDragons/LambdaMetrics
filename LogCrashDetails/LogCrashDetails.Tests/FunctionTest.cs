@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LogCrashDetails.Tests
@@ -5,9 +6,9 @@ namespace LogCrashDetails.Tests
     public class FunctionTest
     {
         [Fact]
-        public void Test()
+        public async Task Test()
         {
-            new Function().FunctionHandler(new CrashDetail
+            await new Function().FunctionHandler(new CrashDetail
             {
                 ApplicationName = "LogCrashDetails",
                 ApplicationVersion = "1.0",

@@ -1,29 +1,40 @@
 using System;
 using System.Data.SqlClient;
+using System.IO;
+using System.Threading.Tasks;
+using Amazon;
 using Amazon.Lambda.Core;
+using Amazon.Runtime;
+using Amazon.S3;
+using Amazon.S3.Model;
 using Dapper;
+using Newtonsoft.Json;
 
-// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
 namespace LogCrashDetails
 {
     public class Function
     {
-        public void FunctionHandler(CrashDetail input)
+        public async Task FunctionHandler(CrashDetail input)
         {
-            using (var db = new SqlConnection("nope"))
+            var millis = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+            using (var client = new AmazonS3Client(RegionEndpoint.USWest2))
             {
-                db.Execute("INSERT INTO Metrics.CrashReports (ReceivedTimeUtc, ApplicationName, ApplicationVersion, ContextJson, StackTrace) " +
-                           "Values (@UnixUtcMillis, @ApplicationName, @ApplicationVersion, @ContextJson, @StackTrace);", 
-                           new
-                            {
-                                UnixUtcMillis = (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds,
-                                input.ApplicationName,
-                                input.ApplicationVersion,
-                                input.ContextJson,
-                                input.StackTrace 
-                            });
+                var putRequest = new PutObjectRequest
+                {
+                    BucketName = "enigma-dragons-crash-reports",
+                    Key = millis.ToString(),
+                    ContentBody = JsonConvert.SerializeObject(new
+                    {
+                        UnixUtcMillis = millis,
+                        input.ApplicationName,
+                        input.ApplicationVersion,
+                        input.ContextJson,
+                        input.StackTrace 
+                    }) 
+                };
+                await client.PutObjectAsync(putRequest);
             }
         }
     }
