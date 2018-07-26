@@ -18,16 +18,15 @@ namespace LogCrashDetails
     {
         public async Task FunctionHandler(CrashDetail input)
         {
-            var millis = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
             using (var client = new AmazonS3Client(RegionEndpoint.USWest2))
             {
                 var putRequest = new PutObjectRequest
                 {
                     BucketName = "enigma-dragons-crash-reports",
-                    Key = millis.ToString(),
+                    Key = $"{input.ApplicationName.Replace(" ", String.Empty)}-{Guid.NewGuid().ToString()}",
                     ContentBody = JsonConvert.SerializeObject(new
                     {
-                        UnixUtcMillis = millis,
+                        UnixUtcMillis = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds,
                         input.ApplicationName,
                         input.ApplicationVersion,
                         input.ContextJson,
