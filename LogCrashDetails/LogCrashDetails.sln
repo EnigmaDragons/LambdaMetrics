@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCrashDetails", "LogCrashDetails\LogCrashDetails.csproj", "{3584D860-F70E-4BDB-8413-2ADD7E4640B5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCrashDetails.Tests", "LogCrashDetails.Tests\LogCrashDetails.Tests.csproj", "{3F067577-9B30-4480-87CB-863D6D539C49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3584D860-F70E-4BDB-8413-2ADD7E4640B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3584D860-F70E-4BDB-8413-2ADD7E4640B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3584D860-F70E-4BDB-8413-2ADD7E4640B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3584D860-F70E-4BDB-8413-2ADD7E4640B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F067577-9B30-4480-87CB-863D6D539C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F067577-9B30-4480-87CB-863D6D539C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F067577-9B30-4480-87CB-863D6D539C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F067577-9B30-4480-87CB-863D6D539C49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECAC6BF6-DFA9-4A9A-B94C-DD31862AF6B5}
+	EndGlobalSection
+EndGlobal
